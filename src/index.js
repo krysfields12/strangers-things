@@ -7,7 +7,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 const root = createRoot(document.querySelector('#app'));
 root.render(
     <Router>
-        <App />
+      <App />
     </Router>);
 
 

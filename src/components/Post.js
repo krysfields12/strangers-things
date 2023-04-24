@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { fetchPosts } from "../api/posts"
 
-  const Posts = ({ posts }) => {
+  export default function Posts ({ posts }) {
 
     return (
         posts && posts.map((post) => {
@@ -14,5 +14,3 @@ import { fetchPosts } from "../api/posts"
             )
         })
     )}
-
-export default Posts

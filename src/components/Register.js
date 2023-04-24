@@ -3,11 +3,11 @@ import { registerUser } from "../api/users";
 
 
 
-const Register = ({ setToken }) => {
+export default function Register ({ setToken }) {
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
 
-const handleSubmit = async (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const user = { username, password };
     /*
@@ -44,5 +44,3 @@ const handleSubmit = async (event) => {
         </form>
     )
 }
-
-export default Register

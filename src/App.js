@@ -4,12 +4,13 @@ import {
   Register,
   Posts,
   Login,
+  CreatePost
 } from './components'
 
 import { fetchPosts } from './api/posts';
 
 
-function App() {
+export default function App() {
   const [token, setToken] = useState('');
   const [posts, setPosts] = useState([]);
   
@@ -48,9 +49,16 @@ function App() {
           path='/login'
           element={<Login setToken={setToken} />}
         />
+        <Route 
+          path='/create-post'
+          element={<CreatePost token={token} getPosts={getPosts} />}
+        />
       </Routes>
     </div>
   );
 }
 
-export default App;
+
+
+// component life-cycle
+// Mount (initial render) -> updates ( re-render) -> unmount
