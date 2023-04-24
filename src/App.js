@@ -1,43 +1,56 @@
 import React, { useState, useEffect } from 'react';
-import { Register, Post, Login } from './components'
-import { Route, Routes, Link, } from 'react-router-dom'
+import { Routes, Route } from 'react-router-dom';
+import { 
+  Register,
+  Posts,
+  Login,
+} from './components'
+
+import { fetchPosts } from './api/posts';
 
 
-const App = () => {
-    
-    const [token, setToken] = useState("");
-
+function App() {
+  const [token, setToken] = useState('');
+  const [posts, setPosts] = useState([]);
+  
+  useEffect(() => {
     const tokenCheck = () => {
-        if(window.localStorage.getItem("token")) {
-            setToken(window.localStorage.getItem("token"));
+        if (window.localStorage.getItem('token')) {
+          setToken(window.localStorage.getItem('token'));
         }
-    }
-
-    useEffect(() => {
-        tokenCheck();
-    }, []);
-
-    return (
-       <div>
-            <nav>
-                <Link to='/'>Register</Link>
-            </nav>
-               <Routes>
-                <Route
-                    path='/'
-                    element={< Post />}
-                />
-                <Route 
-                    path='/register' 
-                    element={ <Register setToken={setToken} /> } 
-                />
-                <Route
-                    path="/login"
-                    element={ <Login />}
-                />
-                </Routes>
-        </div>
-    )
+      }
+      tokenCheck();
+  }, [])
+  
+  useEffect(() => {
+    const getPosts = async () => {
+      const result = await fetchPosts();
+        if(result.success) {
+            setPosts(result.data.posts)
+        };
+      };
+      getPosts();
+}, [token]);
+  
+  
+  return (
+    <div>
+      <Routes>
+        <Route 
+          path='/' 
+          element={<Posts posts={posts} />} 
+        />
+        <Route 
+          path='/register' 
+          element={<Register setToken={setToken} />} 
+        />
+        <Route
+          path='/login'
+          element={<Login setToken={setToken} />}
+        />
+      </Routes>
+    </div>
+  );
 }
 
-export default App  
+export default App;
