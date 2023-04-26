@@ -14,24 +14,26 @@ export default function App() {
   const [token, setToken] = useState('');
   const [posts, setPosts] = useState([]);
   
-  useEffect(() => {
-    const tokenCheck = () => {
-        if (window.localStorage.getItem('token')) {
-          setToken(window.localStorage.getItem('token'));
-        }
-      }
-      tokenCheck();
-  }, [])
-  
-  useEffect(() => {
     const getPosts = async () => {
       const result = await fetchPosts();
         if(result.success) {
             setPosts(result.data.posts)
         };
       };
-      getPosts();
-}, [token]);
+
+      useEffect(() => {
+        const tokenCheck = () => {
+            if (window.localStorage.getItem('token')) {
+              setToken(window.localStorage.getItem('token'));
+            }
+          }
+          tokenCheck();
+      }, [])
+
+      useEffect(() => {
+        getPosts()
+      }, [token]);
+    
   
   
   return (
