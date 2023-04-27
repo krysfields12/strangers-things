@@ -19,11 +19,6 @@ export default function App() {
   
   const navigate = useNavigate();
 
-  const tokenCheck = () => {
-    if(window.localStorage.getItem("token")) {
-        setToken(window.localStorage.getItem("token"));
-    }
-  }
 
   const getPosts = async () => {
       const result = await fetchPosts();
@@ -39,26 +34,27 @@ export default function App() {
     }
   }
 
-      useEffect(() => {
-        const tokenCheck = () => {
-            if (window.localStorage.getItem('token')) {
-              setToken(window.localStorage.getItem('token'));
-            }
-          }
-          tokenCheck();
-      }, [])
 
-      useEffect(() => {
-        getPosts();
-        if (token) {
-          getMyData();
-          setIsLoggedIn(true);
-        }
-      }, [token]);
+  useEffect(() => {
+    const tokenCheck = () => {
+    if (window.localStorage.getItem('token')) {
+      setToken(window.localStorage.getItem('token'));
+    }
+   }
+     tokenCheck();
+  }, [])
+
+
+   useEffect(() => {
+     getPosts();
+     if (token) {
+       getMyData();
+       setIsLoggedIn(true);
+      }
+    }, [token]);
     
-  
-  
-  return (
+    
+      return (
     <div>
       <NavBar 
         setToken={setToken}

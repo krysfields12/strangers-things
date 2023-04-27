@@ -27,9 +27,9 @@ export default function NavBar({ setToken, setIsLoggedIn, isLoggedIn }) {
               <Link to="/register">Register</Link>
             </button>
           </>
-        )}
-      </nav> 
-    )
+      )}
+    </nav> 
+  )
 }
 
 
